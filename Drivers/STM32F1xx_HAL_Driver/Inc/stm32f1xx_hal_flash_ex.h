@@ -203,12 +203,12 @@ typedef struct
                              This parameter can be a value of @ref FLASHEx_OB_Read_Protection */
 
 #if defined(FLASH_BANK2_END)
-  uint8_t USERConfig;   /*!< USERConfig: Program the FLASH User Option Byte: 
+  uint8_t USERConfig;   /*!< USERConfig: Program the FLASH UserLib Option Byte:
                              IWDG / STOP / STDBY / BOOT1
                              This parameter can be a combination of @ref FLASHEx_OB_IWatchdog, @ref FLASHEx_OB_nRST_STOP, 
                              @ref FLASHEx_OB_nRST_STDBY, @ref FLASHEx_OB_BOOT1 */
 #else
-  uint8_t USERConfig;   /*!< USERConfig: Program the FLASH User Option Byte: 
+  uint8_t USERConfig;   /*!< USERConfig: Program the FLASH UserLib Option Byte:
                              IWDG / STOP / STDBY
                              This parameter can be a combination of @ref FLASHEx_OB_IWatchdog, @ref FLASHEx_OB_nRST_STOP, 
                              @ref FLASHEx_OB_nRST_STDBY */

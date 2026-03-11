@@ -728,7 +728,7 @@ typedef struct
 /**
   * @brief  Macro to configure the External High Speed oscillator (HSE).
   * @note   Transition HSE Bypass to HSE On and HSE On to HSE Bypass are not
-  *         supported by this macro. User should request a transition to HSE Off
+  *         supported by this macro. UserLib should request a transition to HSE Off
   *         first and then HSE On or HSE Bypass.
   * @note   After enabling the HSE (RCC_HSE_ON or RCC_HSE_Bypass), the application
   *         software should wait on HSERDY flag to be set indicating that HSE clock
@@ -1177,7 +1177,7 @@ void              HAL_RCC_GetClockConfig(RCC_ClkInitTypeDef  *RCC_ClkInitStruct,
 /* CSS NMI IRQ handler */
 void              HAL_RCC_NMI_IRQHandler(void);
 
-/* User Callbacks in non blocking mode (IT mode) */
+/* UserLib Callbacks in non blocking mode (IT mode) */
 void              HAL_RCC_CSSCallback(void);
 
 /**
