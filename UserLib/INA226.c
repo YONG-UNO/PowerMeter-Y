@@ -117,6 +117,7 @@ static uint16_t Read(uint8_t reg) {
 // }
 
 
+
 // read register result
 static uint16_t RegisterRead(I2C_HandleTypeDef *hi2c, uint8_t reg) {
      static uint8_t buf[2] = {0};
