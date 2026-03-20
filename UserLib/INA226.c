@@ -24,6 +24,18 @@ static uint16_t Read(uint8_t reg);
     return 1; //no ok
 }
 
+static uint8_t Write(I2C_HandleTypeDef *hi2c, uint8_t reg, uint16_t data) {
+     uint8_t buf[3];
+     buf[0] = reg;  // register address
+     buf[1] = (data >> 8) & 0xFF; // high 8 bits MSB
+     buf[2] = data & 0xFF; // low 8 bits LSB
+
+     if (HAL_I2C_Master_Transmit(hi2c, INA226_IIC_ADD, buf, 3, 100) == HAL_OK) {
+         return 0;
+     }
+     return 1;
+ }
+
 static uint16_t Read(uint8_t reg) {
     uint8_t buf[2] = {0};
     uint16_t result = 0;
@@ -102,3 +114,25 @@ static uint16_t Read(uint8_t reg) {
 //     }
 //     return res;
 // }
+
+
+// read register result
+static uint16_t RegisterRead(I2C_HandleTypeDef *hi2c, uint8_t reg) {
+     uint8_t buf[2] = {0};
+     uint16_t result = 0;
+
+     // step 1: send register address
+     if (HAL_I2C_Master_Transmit(hi2c, INA226_IIC_ADD, &reg, 1, 100) != HAL_OK) {
+        return 0; // error
+     }
+     if (HAL_I2C_Master_Receive(hi2c, INA226_IIC_ADD, buf, 2, 100) == HAL_OK) {
+         return 0;
+     }
+
+     return result;
+ }
+
+static uint32_t BusVoltage(I2C_HandleTypeDef *hi2c) {
+     uint32_t reg_val =
+ }
+
