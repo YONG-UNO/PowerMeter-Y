@@ -132,7 +132,9 @@ static uint16_t RegisterRead(I2C_HandleTypeDef *hi2c, uint8_t reg) {
      return result;
  }
 
-static uint32_t BusVoltage(I2C_HandleTypeDef *hi2c) {
-     uint32_t reg_val =
- }
 
+// read bus voltage
+static float BusVoltage(I2C_HandleTypeDef *hi2c) {
+     uint16_t result = RegisterRead(hi2c, BUS_VOLTAGE_REGISTER);
+     return (float)result * 1.25f / 1000.0f;
+ }

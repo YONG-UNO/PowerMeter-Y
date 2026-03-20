@@ -361,7 +361,7 @@ HAL_StatusTypeDef HAL_EXTI_ClearConfigLine(EXTI_HandleTypeDef *hexti)
 /**
   * @brief  Register callback for a dedicated Exti line.
   * @param  hexti Exti handle.
-  * @param  CallbackID UserLib callback identifier.
+  * @param  CallbackID User callback identifier.
   *         This parameter can be one of @arg @ref EXTI_CallbackIDTypeDef values.
   * @param  pPendingCbfn function pointer to be stored as callback.
   * @retval HAL Status.

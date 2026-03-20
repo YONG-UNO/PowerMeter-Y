@@ -922,9 +922,9 @@ static HAL_StatusTypeDef FLASH_OB_RDP_LevelConfig(uint8_t ReadProtectLevel)
 }
 
 /**
-  * @brief  Program the FLASH UserLib Option Byte.
+  * @brief  Program the FLASH User Option Byte.    
   * @note   Programming of the OB should be performed only after an erase (otherwise PGERR occurs)
-  * @param  UserConfig The FLASH UserLib Option Bytes values FLASH_OBR_IWDG_SW(Bit2),
+  * @param  UserConfig The FLASH User Option Bytes values FLASH_OBR_IWDG_SW(Bit2), 
   *         FLASH_OBR_nRST_STOP(Bit3),FLASH_OBR_nRST_STDBY(Bit4).
   *         And BFBF2(Bit5) for STM32F101xG and STM32F103xG . 
   * @retval HAL status
@@ -1047,14 +1047,14 @@ static uint32_t FLASH_OB_GetRDP(void)
 }
 
 /**
-  * @brief  Return the FLASH UserLib Option Byte value.
-  * @retval The FLASH UserLib Option Bytes values: FLASH_OBR_IWDG_SW(Bit2),
+  * @brief  Return the FLASH User Option Byte value.
+  * @retval The FLASH User Option Bytes values: FLASH_OBR_IWDG_SW(Bit2), 
   *         FLASH_OBR_nRST_STOP(Bit3),FLASH_OBR_nRST_STDBY(Bit4).
   *         And FLASH_OBR_BFB2(Bit5) for STM32F101xG and STM32F103xG . 
   */
 static uint8_t FLASH_OB_GetUser(void)
 {
-  /* Return the UserLib Option Byte */
+  /* Return the User Option Byte */
   return (uint8_t)((READ_REG(FLASH->OBR) & FLASH_OBR_USER) >> FLASH_POSITION_IWDGSW_BIT);
 }
 

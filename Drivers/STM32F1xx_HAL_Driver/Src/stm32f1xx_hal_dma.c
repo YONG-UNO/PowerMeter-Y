@@ -35,7 +35,7 @@
           (+) Use HAL_DMA_Start() to start DMA transfer after the configuration of Source
               address and destination address and the Length of data to be transferred
           (+) Use HAL_DMA_PollForTransfer() to poll for the end of current transfer, in this
-              case a fixed Timeout can be configured by UserLib depending from his application.
+              case a fixed Timeout can be configured by User depending from his application.
 
      *** Interrupt mode IO operation ***
      ===================================
@@ -481,7 +481,7 @@ HAL_StatusTypeDef HAL_DMA_Abort_IT(DMA_HandleTypeDef *hdma)
     /* Process Unlocked */
     __HAL_UNLOCK(hdma);
 
-    /* Call UserLib Abort callback */
+    /* Call User Abort callback */
     if(hdma->XferAbortCallback != NULL)
     {
       hdma->XferAbortCallback(hdma);
@@ -683,7 +683,7 @@ void HAL_DMA_IRQHandler(DMA_HandleTypeDef *hdma)
   * @brief Register callbacks
   * @param hdma: pointer to a DMA_HandleTypeDef structure that contains
   *              the configuration information for the specified DMA Channel.
-  * @param CallbackID: UserLib Callback identifier
+  * @param CallbackID: User Callback identifier
   *                    a HAL_DMA_CallbackIDTypeDef ENUM as parameter.
   * @param pCallback: pointer to private callback function which has pointer to 
   *                   a DMA_HandleTypeDef structure as parameter.
@@ -736,7 +736,7 @@ HAL_StatusTypeDef HAL_DMA_RegisterCallback(DMA_HandleTypeDef *hdma, HAL_DMA_Call
   * @brief UnRegister callbacks
   * @param hdma: pointer to a DMA_HandleTypeDef structure that contains
   *              the configuration information for the specified DMA Channel.
-  * @param CallbackID: UserLib Callback identifier
+  * @param CallbackID: User Callback identifier
   *                    a HAL_DMA_CallbackIDTypeDef ENUM as parameter.
   * @retval HAL status
   */              
