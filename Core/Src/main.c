@@ -97,7 +97,7 @@ int main(void)
   while (1)
   {
     if (Check() == 0) {
-    busvoltage = BusVoltage(&hi2c1);
+    busvoltage = BusVoltage();
     }
     HAL_Delay(50);
     /* USER CODE END WHILE */

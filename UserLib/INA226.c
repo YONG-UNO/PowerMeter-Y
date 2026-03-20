@@ -3,20 +3,16 @@
 //
 
 #include "INA226.h"
-
 #include <stdint.h>
-
 #include "i2c.h"
 #include "stm32f1xx_hal_i2c.h"
 
 static uint8_t Write(I2C_HandleTypeDef *hi2c, uint8_t reg, uint16_t data);
-static uint16_t Read(uint8_t reg);
-static uint16_t RegisterRead(I2C_HandleTypeDef *hi2c, uint8_t reg);
+static uint16_t Read(I2C_HandleTypeDef *hi2c, uint8_t reg);
 
 uint8_t Check(void) {
-    uint16_t manufacture_id, die_id;
-    manufacture_id = Read(MANUFACTURER_ID_REGISTER);
-    die_id = Read(DIE_ID_REGISTER);
+    uint16_t manufacture_id = Read(&hi2c1, MANUFACTURER_ID_REGISTER);
+    uint16_t die_id = Read(&hi2c1, DIE_ID_REGISTER);
 
     if ((manufacture_id == 0x5449) && (die_id == 0x2260)) {
         return 0; // ok
@@ -37,137 +33,61 @@ static uint8_t Write(I2C_HandleTypeDef *hi2c, uint8_t reg, uint16_t data) {
      return 1;
  }
 
-static uint16_t Read(uint8_t reg) {
+// read register result
+static uint16_t Read(I2C_HandleTypeDef *hi2c, uint8_t reg) {
     uint8_t buf[2] = {0};
     uint16_t result = 0;
 
-    if (HAL_I2C_Master_Transmit(&hi2c1, INA226_IIC_ADD, &reg, 1, 100) != HAL_OK) {
-        return 0;
+     // step 1: send register address
+    if (HAL_I2C_Master_Transmit(hi2c, INA226_IIC_ADD, &reg, 1, 100) != HAL_OK) {
+        return 0; // error
     }
-    if (HAL_I2C_Master_Receive(&hi2c1, INA226_IIC_ADD, buf, 2, 100) == HAL_OK) {
+    if (HAL_I2C_Master_Receive(hi2c, INA226_IIC_ADD, buf, 2, 100) == HAL_OK) {
         result = (uint16_t)buf[0] << 8 | (uint16_t)buf[1];
     }
 
     return result;
 }
 
-
-// #include "ina226.h"
-//
-// extern I2C_HandleTypeDef hi2c1; // 全局I2C句柄，CubeMX生成，按需替换hi2c2
-//
-// /**
-//  * @brief  检测INA226是否在线（读厂商ID和芯片ID，最核心的通信验证）
-//  * @retval 0-在线，1-不在线
-//  */
-// uint8_t INA226_Check(void)
-// {
-//     uint16_t mfr_id, die_id;
-//     // 读厂商ID（固定0x5449）和芯片ID（固定0x2260）
-//     mfr_id = INA226_ReadReg(INA226_REG_MFR_ID);
-//     die_id = INA226_ReadReg(INA226_REG_DIE_ID);
-//     // 验证ID是否正确
-//     if((mfr_id == 0x5449) && (die_id == 0x2260))
-//     {
-//         return 0; // 通信正常，芯片在线
-//     }
-//     return 1; // 通信失败，芯片未检测到
-// }
-//
-// /**
-//  * @brief  向INA226指定寄存器写16位数据（MSB高位在前，符合手册要求）
-//  * @param  reg: 寄存器地址
-//  * @param  data: 要写入的16位数据
-//  * @retval 0-成功，1-失败
-//  */
-// uint8_t INA226_WriteReg(uint8_t reg, uint16_t data)
-// {
-//     uint8_t buf[3];
-//     buf[0] = reg;                // 寄存器地址
-//     buf[1] = (data >> 8) & 0xFF; // 高8位（MSB）
-//     buf[2] = data & 0xFF;        // 低8位（LSB）
-//     // I2C主发送：地址+寄存器+16位数据，超时100ms
-//     if(HAL_I2C_Master_Transmit(&hi2c1, INA226_I2C_ADDR, buf, 3, 100) == HAL_OK)
-//     {
-//         return 0;
-//     }
-//     return 1;
-// }
-//
-// /**
-//  * @brief  从INA226指定寄存器读16位数据（MSB高位在前，符合手册要求）
-//  * @param  reg: 寄存器地址
-//  * @retval 读取到的16位数据，通信失败返回0
-//  */
-// uint16_t INA226_ReadReg(uint8_t reg)
-// {
-//     uint8_t buf[2] = {0};
-//     uint16_t res = 0;
-//     // 第一步：发送寄存器地址，告诉INA226要读哪个寄存器
-//     if(HAL_I2C_Master_Transmit(&hi2c1, INA226_I2C_ADDR, &reg, 1, 100) != HAL_OK)
-//     {
-//         return 0; // 地址发送失败
-//     }
-//     // 第二步：读取该寄存器的16位数据（高8位+低8位）
-//     if(HAL_I2C_Master_Receive(&hi2c1, INA226_I2C_ADDR, buf, 2, 100) == HAL_OK)
-//     {
-//         res = (uint16_t)buf[0] << 8 | buf[1]; // 拼接高8位和低8位
-//     }
-//     return res;
-// }
-
-
-
-// read register result
-static uint16_t RegisterRead(I2C_HandleTypeDef *hi2c, uint8_t reg) {
-     static uint8_t buf[2] = {0};
-     static uint16_t result;
-
-     // step 1: send register address
-     if (HAL_I2C_Master_Transmit(hi2c, INA226_IIC_ADD, &reg, 1, 100) != HAL_OK) {
-        return 0; // error
-     }
-     if (HAL_I2C_Master_Receive(hi2c, INA226_IIC_ADD, buf, 2, 100) == HAL_OK) {
-         return result = buf[0] << 8 | buf[1];
-     }
+// 总线电压
+float BusVoltage(void) {
+     uint16_t result = Read(&hi2c1, SHUNT_VOLTAGE_REGISTER);
+     return (float)result * 2.5f / 1000.0f;
 }
 
-float BusVoltage(I2C_HandleTypeDef *hi2c) {
-     uint16_t result = RegisterRead(hi2c, BUS_VOLTAGE_REGISTER);
-     return (float)result * 2.5f / 1000.0f - 0.93f;
- }
+// 分流电阻电压
+float ShuntVoltage(void) {
+    uint16_t result = Read(&hi2c1, BUS_VOLTAGE_REGISTER);
+    return (float)result * 2.5f / 1000.0f - 0.93f;
+}
 
 float ResistanceVoltage(void) {
-    uint16_t result = RegisterRead(&hi2c1, SHUNT_VOLTAGE_REGISTER);
+    uint16_t result = Read(&hi2c1, SHUNT_VOLTAGE_REGISTER);
     return (float)result * 2.5f / 1000000;
 }
 
-float PowerValue(void) {
-    uint16_t result = RegisterRead(&hi2c1, POWER_REGISTER);
-    return (float)result * 2.5f / 1000000;}
+uint8_t calibration_flag = 0;
 
-/*电流 = 04h 寄存器 × 最大电流 / 32768
-功率 = 03h 寄存器 × 25× 最大电流 / 32768
-必须先写校准值 05h，否则读不出电流功率
+// 读取电流 (A)
+float Current(void) {
 
-// 配置参数（你改这里就行）
-#define R_SHUNT       0.01f   // 分流电阻 0.01Ω
-#define MAX_CURRENT   10.0f   // 最大电流10A
+    if (calibration_flag == 0) {
+        Write(&hi2c1, CALIBRATION_REGISTER, (uint16_t)CALIBRATION_VALUE);
+        calibration_flag = 1;
+    }
 
-// 自动计算
-#define CURRENT_LSB   (MAX_CURRENT / 32768.0f)
-#define POWER_LSB      (CURRENT_LSB * 25.0f)
-#define CALIBRATION    (uint16_t)(0.00512f / (CURRENT_LSB * R_SHUNT))
+    uint16_t result = Read(&hi2c1, CURRENT_REGISTER);
+    return (float)result * CURRENT_LSB;
+}
 
+// 读取功率 (W)
+float Power(void) {
 
-// 1. 写校准值（初始化必须调用）
-INA226_WriteReg(0x05, CALIBRATION);
+    if (calibration_flag == 0) {
+        Write(&hi2c1, CALIBRATION_REGISTER, (uint16_t)CALIBRATION_VALUE);
+        calibration_flag = 1;
+    }
 
-// 2. 读电流
-int16_t current_reg = INA226_ReadReg(0x04);
-float current = current_reg * CURRENT_LSB;
-
-// 3. 读功率
-uint16_t power_reg = INA226_ReadReg(0x03);
-float power = power_reg * POWER_LSB;
-*/
+    uint16_t result = Read(&hi2c1, POWER_REGISTER);
+    return (float)result * POWER_LSB;
+}
