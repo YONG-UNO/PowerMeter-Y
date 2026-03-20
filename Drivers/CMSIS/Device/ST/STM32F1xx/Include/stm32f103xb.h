@@ -9791,7 +9791,7 @@ typedef struct
 #define FLASH_OBR_nRST_STDBY                FLASH_OBR_nRST_STDBY_Msk           /*!< nRST_STDBY */
 #define FLASH_OBR_USER_Pos                  (2U)                               
 #define FLASH_OBR_USER_Msk                  (0x7UL << FLASH_OBR_USER_Pos)       /*!< 0x0000001C */
-#define FLASH_OBR_USER                      FLASH_OBR_USER_Msk                 /*!< UserLib Option Bytes */
+#define FLASH_OBR_USER                      FLASH_OBR_USER_Msk                 /*!< User Option Bytes */
 #define FLASH_OBR_DATA0_Pos                 (10U)                              
 #define FLASH_OBR_DATA0_Msk                 (0xFFUL << FLASH_OBR_DATA0_Pos)     /*!< 0x0003FC00 */
 #define FLASH_OBR_DATA0                     FLASH_OBR_DATA0_Msk                /*!< Data0 */
@@ -9817,26 +9817,26 @@ typedef struct
 /******************  Bit definition for FLASH_USER register  ******************/
 #define FLASH_USER_USER_Pos                 (16U)                              
 #define FLASH_USER_USER_Msk                 (0xFFUL << FLASH_USER_USER_Pos)     /*!< 0x00FF0000 */
-#define FLASH_USER_USER                     FLASH_USER_USER_Msk                /*!< UserLib option byte */
+#define FLASH_USER_USER                     FLASH_USER_USER_Msk                /*!< User option byte */
 #define FLASH_USER_nUSER_Pos                (24U)                              
 #define FLASH_USER_nUSER_Msk                (0xFFUL << FLASH_USER_nUSER_Pos)    /*!< 0xFF000000 */
-#define FLASH_USER_nUSER                    FLASH_USER_nUSER_Msk               /*!< UserLib complemented option byte */
+#define FLASH_USER_nUSER                    FLASH_USER_nUSER_Msk               /*!< User complemented option byte */
 
 /******************  Bit definition for FLASH_Data0 register  *****************/
 #define FLASH_DATA0_DATA0_Pos               (0U)                               
 #define FLASH_DATA0_DATA0_Msk               (0xFFUL << FLASH_DATA0_DATA0_Pos)   /*!< 0x000000FF */
-#define FLASH_DATA0_DATA0                   FLASH_DATA0_DATA0_Msk              /*!< UserLib data storage option byte */
+#define FLASH_DATA0_DATA0                   FLASH_DATA0_DATA0_Msk              /*!< User data storage option byte */
 #define FLASH_DATA0_nDATA0_Pos              (8U)                               
 #define FLASH_DATA0_nDATA0_Msk              (0xFFUL << FLASH_DATA0_nDATA0_Pos)  /*!< 0x0000FF00 */
-#define FLASH_DATA0_nDATA0                  FLASH_DATA0_nDATA0_Msk             /*!< UserLib data storage complemented option byte */
+#define FLASH_DATA0_nDATA0                  FLASH_DATA0_nDATA0_Msk             /*!< User data storage complemented option byte */
 
 /******************  Bit definition for FLASH_Data1 register  *****************/
 #define FLASH_DATA1_DATA1_Pos               (16U)                              
 #define FLASH_DATA1_DATA1_Msk               (0xFFUL << FLASH_DATA1_DATA1_Pos)   /*!< 0x00FF0000 */
-#define FLASH_DATA1_DATA1                   FLASH_DATA1_DATA1_Msk              /*!< UserLib data storage option byte */
+#define FLASH_DATA1_DATA1                   FLASH_DATA1_DATA1_Msk              /*!< User data storage option byte */
 #define FLASH_DATA1_nDATA1_Pos              (24U)                              
 #define FLASH_DATA1_nDATA1_Msk              (0xFFUL << FLASH_DATA1_nDATA1_Pos)  /*!< 0xFF000000 */
-#define FLASH_DATA1_nDATA1                  FLASH_DATA1_nDATA1_Msk             /*!< UserLib data storage complemented option byte */
+#define FLASH_DATA1_nDATA1                  FLASH_DATA1_nDATA1_Msk             /*!< User data storage complemented option byte */
 
 /******************  Bit definition for FLASH_WRP0 register  ******************/
 #define FLASH_WRP0_WRP0_Pos                 (0U)                               

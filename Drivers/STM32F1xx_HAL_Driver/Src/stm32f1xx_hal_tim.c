@@ -5800,7 +5800,7 @@ __weak void HAL_TIM_ErrorCallback(TIM_HandleTypeDef *htim)
 
 #if (USE_HAL_TIM_REGISTER_CALLBACKS == 1)
 /**
-  * @brief  Register a UserLib TIM callback to be used instead of the weak predefined callback
+  * @brief  Register a User TIM callback to be used instead of the weak predefined callback
   * @param htim tim handle
   * @param CallbackID ID of the callback to be registered
   *        This parameter can be one of the following values:

@@ -432,7 +432,7 @@ static void I2C_Flush_DR(I2C_HandleTypeDef *hi2c);
     [..]  This subsection provides a set of functions allowing to initialize and
           deinitialize the I2Cx peripheral:
 
-      (+) UserLib must Implement HAL_I2C_MspInit() function in which he configures
+      (+) User must Implement HAL_I2C_MspInit() function in which he configures
           all related peripherals resources (CLOCK, GPIO, DMA, IT and NVIC).
 
       (+) Call the function HAL_I2C_Init() to configure the selected device with
@@ -649,7 +649,7 @@ __weak void HAL_I2C_MspDeInit(I2C_HandleTypeDef *hi2c)
 
 #if (USE_HAL_I2C_REGISTER_CALLBACKS == 1)
 /**
-  * @brief  Register a UserLib I2C Callback
+  * @brief  Register a User I2C Callback
   *         To be used instead of the weak predefined callback
   * @param  hi2c Pointer to a I2C_HandleTypeDef structure that contains
   *                the configuration information for the specified I2C.

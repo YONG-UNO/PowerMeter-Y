@@ -335,10 +335,10 @@ HAL_StatusTypeDef HAL_RCC_DeInit(void)
   * @note   The PLL is not disabled when used as system clock.
   * @note   The PLL is not disabled when USB OTG FS clock is enabled (specific to devices with USB FS)
   * @note   Transitions LSE Bypass to LSE On and LSE On to LSE Bypass are not
-  *         supported by this macro. UserLib should request a transition to LSE Off
+  *         supported by this macro. User should request a transition to LSE Off
   *         first and then LSE On or LSE Bypass.
   * @note   Transition HSE Bypass to HSE On and HSE On to HSE Bypass are not
-  *         supported by this macro. UserLib should request a transition to HSE Off
+  *         supported by this macro. User should request a transition to HSE Off
   *         first and then HSE On or HSE Bypass.
   * @retval HAL status
   */
