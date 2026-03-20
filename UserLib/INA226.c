@@ -9,10 +9,11 @@
 #include "i2c.h"
 #include "stm32f1xx_hal_i2c.h"
 
-
+static uint8_t Write(I2C_HandleTypeDef *hi2c, uint8_t reg, uint16_t data);
 static uint16_t Read(uint8_t reg);
+static uint16_t RegisterRead(I2C_HandleTypeDef *hi2c, uint8_t reg);
 
- uint8_t Check(void) {
+uint8_t Check(void) {
     uint16_t manufacture_id, die_id;
     manufacture_id = Read(MANUFACTURER_ID_REGISTER);
     die_id = Read(DIE_ID_REGISTER);
@@ -118,21 +119,19 @@ static uint16_t Read(uint8_t reg) {
 
 // read register result
 static uint16_t RegisterRead(I2C_HandleTypeDef *hi2c, uint8_t reg) {
-     uint8_t buf[2] = {0};
-     uint16_t result = 0;
+     static uint8_t buf[2] = {0};
+     static uint16_t result;
 
      // step 1: send register address
      if (HAL_I2C_Master_Transmit(hi2c, INA226_IIC_ADD, &reg, 1, 100) != HAL_OK) {
         return 0; // error
      }
      if (HAL_I2C_Master_Receive(hi2c, INA226_IIC_ADD, buf, 2, 100) == HAL_OK) {
-         return 0;
+         return result = buf[0] << 8 | buf[1];
      }
+}
 
-     return result;
+float BusVoltage(I2C_HandleTypeDef *hi2c) {
+     uint16_t result = RegisterRead(hi2c, BUS_VOLTAGE_REGISTER);
+     return (float)result * 2.5f / 1000.0f - 0.93f;
  }
-
-static uint32_t BusVoltage(I2C_HandleTypeDef *hi2c) {
-     uint32_t reg_val =
- }
-

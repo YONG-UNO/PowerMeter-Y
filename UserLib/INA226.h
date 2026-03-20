@@ -5,6 +5,8 @@
 #define POWERMETER_Y_INA226_H
 
 #include <stdint.h>
+#include "stm32f1xx_hal.h"
+#include "stm32f1xx_hal_i2c.h"
 
 
 #define INA226_IIC_ADD (0x40<<1) // A0,A1 to GND -> addr 1000000
@@ -20,6 +22,7 @@
 #define DIE_ID_REGISTER 0xFF // 芯片唯一编号 R
 
 uint8_t Check(void);
+float BusVoltage(I2C_HandleTypeDef *hi2c);
 
 
 #endif //POWERMETER_Y_INA226_H

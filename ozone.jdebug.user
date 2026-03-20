@@ -1,15 +1,17 @@
 
 
-OpenDocument="main.c", FilePath="/home/dingyong/CLionProjects/PowerMeter-Y/Core/Src/main.c", Line=62
+
+Breakpoint=/home/dingyong/CLionProjects/PowerMeter-Y/Core/Src/main.c:100, State=BP_STATE_ON
+Breakpoint=/home/dingyong/CLionProjects/PowerMeter-Y/UserLib/INA226.c:137, State=BP_STATE_ON
+OpenDocument="main.c", FilePath="/home/dingyong/CLionProjects/PowerMeter-Y/Core/Src/main.c", Line=58
 OpenDocument="stm32f1xx_it.c", FilePath="/home/dingyong/CLionProjects/PowerMeter-Y/Core/Src/stm32f1xx_it.c", Line=77
 OpenDocument="startup_stm32f103xb.s", FilePath="/home/dingyong/CLionProjects/PowerMeter-Y/startup_stm32f103xb.s", Line=55
-OpenDocument="INA226.c", FilePath="/home/dingyong/CLionProjects/PowerMeter-Y/UserLib/INA226.c", Line=0
+OpenDocument="INA226.c", FilePath="/home/dingyong/CLionProjects/PowerMeter-Y/UserLib/INA226.c", Line=109
 OpenDocument="stm32f1xx_hal.c", FilePath="/home/dingyong/CLionProjects/PowerMeter-Y/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c", Line=298
 OpenToolbar="Debug", Floating=0, x=0, y=0
-OpenWindow="Memory 1", DockArea=BOTTOM, x=1, y=0, w=956, h=318, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=0, EditorAddress=0x0
-OpenWindow="Watched Data 1", DockArea=RIGHT, x=0, y=0, w=635, h=737, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=0
-OpenWindow="Functions", DockArea=LEFT, x=0, y=0, w=300, h=737, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=0
-OpenWindow="Console", DockArea=BOTTOM, x=0, y=0, w=958, h=318, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=0
+OpenWindow="Watched Data 1", DockArea=RIGHT, x=0, y=0, w=635, h=506, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=0
+OpenWindow="Functions", DockArea=LEFT, x=0, y=0, w=300, h=506, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=0
+OpenWindow="Timeline", DockArea=BOTTOM, x=0, y=0, w=1920, h=549, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=1, DataPaneShown=1, PowerPaneShown=0, CodePaneShown=0, PinCursor="Cursor Movable", TimePerDiv="1 ns / Div", TimeStampFormat="Time", DataGraphDrawAsPoints=0, DataGraphLegendShown=1, DataGraphUniformSampleSpacing=0, DataGraphLegendPosition="1727;0", DataGraphShowNamesAtCursor=0, PowerGraphDrawAsPoints=0, PowerGraphLegendShown=0, PowerGraphAvgFilterTime=Off, PowerGraphAvgFilterLen=Off, PowerGraphUniformSampleSpacing=0, PowerGraphLegendPosition="1734;0", CodeGraphLegendShown=0, CodeGraphLegendPosition="1709;0"
 SmartViewPlugin="", Page="", Toolbar="Hidden", Window="SmartView 1"
 TableHeader="Functions", SortCol="Name", SortOrder="ASCENDING", VisibleCols=["Name";"Address";"Size";"#Insts";"Source"], ColWidths=[931;100;100;100;252]
 TableHeader="Power Sampling", SortCol="None", SortOrder="ASCENDING", VisibleCols=["Index";"Time";"Ch 0"], ColWidths=[100;100;100]
@@ -17,3 +19,4 @@ TableHeader="Watched Data 1", SortCol="Expression", SortOrder="ASCENDING", Visib
 TableHeader="RegisterSelectionDialog", SortCol="None", SortOrder="ASCENDING", VisibleCols=[], ColWidths=[]
 TableHeader="TargetExceptionDialog", SortCol="Name", SortOrder="ASCENDING", VisibleCols=["Name";"Value";"Address";"Description"], ColWidths=[200;100;100;359]
 WatchedExpression="a", RefreshRate=5, Window=Watched Data 1
+WatchedExpression="BusVoltage(struct I2C_HandleTypeDef*)", RefreshRate=5, Window=Watched Data 1
