@@ -136,3 +136,38 @@ float BusVoltage(I2C_HandleTypeDef *hi2c) {
      uint16_t result = RegisterRead(hi2c, BUS_VOLTAGE_REGISTER);
      return (float)result * 2.5f / 1000.0f - 0.93f;
  }
+
+float ResistanceVoltage(void) {
+    uint16_t result = RegisterRead(&hi2c1, SHUNT_VOLTAGE_REGISTER);
+    return (float)result * 2.5f / 1000000;
+}
+
+float PowerValue(void) {
+    uint16_t result = RegisterRead(&hi2c1, POWER_REGISTER);
+    return (float)result * 2.5f / 1000000;}
+
+/*电流 = 04h 寄存器 × 最大电流 / 32768
+功率 = 03h 寄存器 × 25× 最大电流 / 32768
+必须先写校准值 05h，否则读不出电流功率
+
+// 配置参数（你改这里就行）
+#define R_SHUNT       0.01f   // 分流电阻 0.01Ω
+#define MAX_CURRENT   10.0f   // 最大电流10A
+
+// 自动计算
+#define CURRENT_LSB   (MAX_CURRENT / 32768.0f)
+#define POWER_LSB      (CURRENT_LSB * 25.0f)
+#define CALIBRATION    (uint16_t)(0.00512f / (CURRENT_LSB * R_SHUNT))
+
+
+// 1. 写校准值（初始化必须调用）
+INA226_WriteReg(0x05, CALIBRATION);
+
+// 2. 读电流
+int16_t current_reg = INA226_ReadReg(0x04);
+float current = current_reg * CURRENT_LSB;
+
+// 3. 读功率
+uint16_t power_reg = INA226_ReadReg(0x03);
+float power = power_reg * POWER_LSB;
+*/
