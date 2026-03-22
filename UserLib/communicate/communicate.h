@@ -2,8 +2,8 @@
 // Created by DingYong on 2026/3/21.
 //
 
-#ifndef POWERMETER_Y_UART_H
-#define POWERMETER_Y_UART_H
+#ifndef COMMUNICATE_H
+#define COMMUNICATE_H
 
 #include "stm32f1xx_hal.h"
 
@@ -18,4 +18,4 @@ typedef struct {
 } frame_t;
 #pragma pack()
 
-#endif //POWERMETER_Y_UART_H
+#endif //COMMUNICATE_H
