@@ -35,6 +35,8 @@ enable_language(C ASM)
 # Create an executable object type
 add_executable(${CMAKE_PROJECT_NAME}
         UserLib/INA226.c
+        UserLib/communicate/communicate.c
+        UserLib/communicate/communicate.h
 )
 
 # Add STM32CubeMX generated sources

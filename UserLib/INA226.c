@@ -51,19 +51,15 @@ static uint16_t Read(I2C_HandleTypeDef *hi2c, uint8_t reg) {
 
 // 总线电压
 float BusVoltage(void) {
-     uint16_t result = Read(&hi2c1, SHUNT_VOLTAGE_REGISTER);
-     return (float)result * 2.5f / 1000.0f;
+    static uint16_t result = 0;
+    result = Read(&hi2c1, BUS_VOLTAGE_REGISTER);
+    return (float)result * 1.25f / 1000.0f;
 }
 
 // 分流电阻电压
 float ShuntVoltage(void) {
-    uint16_t result = Read(&hi2c1, BUS_VOLTAGE_REGISTER);
-    return (float)result * 2.5f / 1000.0f - 0.93f;
-}
-
-float ResistanceVoltage(void) {
     uint16_t result = Read(&hi2c1, SHUNT_VOLTAGE_REGISTER);
-    return (float)result * 2.5f / 1000000;
+    return (float)result * 2.5f / 1000000.0f;
 }
 
 uint8_t calibration_flag = 0;
@@ -76,7 +72,7 @@ float Current(void) {
         calibration_flag = 1;
     }
 
-    uint16_t result = Read(&hi2c1, CURRENT_REGISTER);
+    int16_t result = (int16_t)Read(&hi2c1, CURRENT_REGISTER);
     return (float)result * CURRENT_LSB;
 }
 

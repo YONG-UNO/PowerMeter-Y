@@ -12,7 +12,7 @@
 #define MAX_EXPECTED_CURRENT     15.0f // 最大预期电流 (A)
 #define R_SHUNT                  0.001f // 分流电阻阻值 (Ω)，这里是1mΩ
 #define CURRENT_LSB              (MAX_EXPECTED_CURRENT / 32768.0f) // 电流分辨率 (A/bit)
-#define CALIBRATION_VALUE        (0.00512f / (CURRENT_LSB * R_SHUNT)) // 校准值
+#define CALIBRATION_VALUE        170640//(0.00512f / (CURRENT_LSB * R_SHUNT)) // 校准值
 #define POWER_LSB                (25 * CURRENT_LSB) // 功率分辨率 (W/bit)，手册规定为Current_LSB的25倍
 
 #define INA226_IIC_ADD (0x40<<1)      // A0,A1 to GND -> addr 1000000
