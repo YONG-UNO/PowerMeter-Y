@@ -18,4 +18,5 @@ typedef struct {
 } frame_t;
 #pragma pack()
 
+
 #endif //POWERMETER_Y_UART_H
