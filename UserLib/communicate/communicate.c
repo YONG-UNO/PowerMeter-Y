@@ -25,9 +25,12 @@ void CommunicateTask(void const * argument) {
     (void) argument;
 
     static frame_t data;
-    PackageFrame(&data);
-    HAL_UART_Transmit_DMA(&huart3, &data, sizeof(frame_t));
 
-    osDelay(2);
+    for (;;) {
+        PackageFrame(&data); // 打包数据
+        HAL_UART_Transmit_DMA(&huart3, (uint8_t *)&data, sizeof(frame_t));
+
+        osDelay(2);
+    }
+
 }
-
