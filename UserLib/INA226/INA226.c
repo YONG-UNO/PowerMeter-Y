@@ -2,7 +2,7 @@
 // Created by DingYong on 2026/3/12.
 //
 
-#include "INA226.h"
+#include "../INA226.h"
 #include <stdint.h>
 #include "i2c.h"
 #include "stm32f1xx_hal_i2c.h"

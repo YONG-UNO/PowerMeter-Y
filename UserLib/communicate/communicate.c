@@ -6,8 +6,8 @@
 
 #include <string.h>
 
+#include "../INA226/INA226.h"
 #include "cmsis_os.h"
-#include "INA226.h"
 #include "usart.h"
 
 static void PackageFrame(frame_t * frame);
