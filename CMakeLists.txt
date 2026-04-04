@@ -36,7 +36,7 @@ enable_language(C ASM)
 add_executable(${CMAKE_PROJECT_NAME}
         UserLib/INA226/INA226.c
         UserLib/communicate/communicate.c
-        UserLib/communicate/communicate.h
+        UserLib/OLED/soft_spi/soft_spi.c
 )
 
 # Add STM32CubeMX generated sources
@@ -56,6 +56,8 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined include paths
         ${CMAKE_SOURCE_DIR}/UserLib
+        ${CMAKE_SOURCE_DIR}/UserLib/OLED/soft_spi
+
 
 )
 
